@@ -11,8 +11,49 @@ on:
       - 'release-*'
 
 jobs:
+  dump_contexts_to_log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
+
+      - name: event is push
+        if: ${{ github.event_name == 'push' }}
+        run: echo "Event is push"
+
+      - name: event is push2
+        if: github.event_name == 'push'
+        run: echo "Event is push2"
+
+      - name: event is pull_request
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "Event is pull_request"
+
+      - name: event is pull_request2
+        if: github.event_name == 'pull_request'
+        run: echo "Event is pull_request2"
+
+      - name: event is push to main or release
+        if: ${{ github.event_name == 'push' }}  && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release'))
+        run: echo "Event is push to main or release"
+
+      - name: event is push to main or release
+        if: github.event_name == 'push'  && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release'))
+        run: echo "Event is push to main or release"
   test:
     runs-on: ubuntu-latest
+    if: false
 
     steps:
       - uses: actions/checkout@v2
