@@ -27,8 +27,15 @@ jobs:
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
+
+      - name: event is push
+        if: ${{ github.event_name == 'push' }}
+        run: echo "Event is push"
+
+
   test:
     runs-on: ubuntu-latest
+    if: false
 
     steps:
       - uses: actions/checkout@v2
