@@ -32,6 +32,17 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: echo "Event is push"
 
+      - name: event is push2
+        if: github.event_name == 'push'
+        run: echo "Event is push2"
+
+      - name: event is pull_request
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "Event is pull_request"
+
+      - name: event is pull_request2
+        if: github.event_name == 'pull_request'
+        run: echo "Event is pull_request2"
 
   test:
     runs-on: ubuntu-latest
