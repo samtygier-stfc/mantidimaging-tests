@@ -112,7 +112,7 @@ html_sidebars = {'**': ['localtoc.html', 'relations.html', 'searchbox.html']}
 # documentation.
 html_theme_options = {
     "switcher": {
-        "json_url": "/_static/version_switcher.json",
+        "json_url": "/mantidimaging-tests/_static/version_switcher.json",
         "version_match": version,
     },
     "navbar_end": ["version-switcher"],
