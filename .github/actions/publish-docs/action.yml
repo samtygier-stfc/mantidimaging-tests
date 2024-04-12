@@ -30,7 +30,9 @@ runs:
 
       git rm -r -q -- [!0-9]* # remove everything apart from versioned directories
       cp -a ../docs/build/html/* ${dir_name}
-      if ! git diff --exit-code ; then
+      md5sum index.html # if no index then there must have been a problem
+
+      if [ "$(git status --porcelain | wc -l)" -gt "0" ]; then
         git add ${dir_name}
         git commit -m "Update documentation"
         git push
